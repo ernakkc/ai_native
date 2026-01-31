@@ -1,0 +1,177 @@
+{
+  "timestamp": "2026-01-31T18:57:42.835Z",
+  "system": {
+    "platform": "darwin",
+    "arch": "x64",
+    "hostname": "Erens-MacBook-Pro.local",
+    "uptime_seconds": 152859,
+    "os": {
+      "name": "macOS",
+      "version": "ProductName:\t\tmacOS\nProductVersion:\t\t15.7.3\nBuildVersion:\t\t24G419",
+      "kernel": "24.6.0"
+    }
+  },
+  "cpu": {
+    "model": "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz",
+    "cores": 12,
+    "speed_mhz": 2600,
+    "extra": "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz"
+  },
+  "memory": {
+    "total_mb": 16384,
+    "free_mb": 127,
+    "used_mb": 16257
+  },
+  "disk": "Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk1s4s1   466Gi    10Gi   254Gi     4%    427k  2.7G    0%   /\ndevfs            199Ki   199Ki     0Bi   100%     691     0  100%   /dev\n/dev/disk1s2     466Gi   2.6Gi   254Gi     2%    2.1k  2.7G    0%   /System/Volumes/Preboot\n/dev/disk1s6     466Gi   3.0Gi   254Gi     2%       3  2.7G    0%   /System/Volumes/VM\n/dev/disk1s5     466Gi   3.1Mi   254Gi     1%      25  2.7G    0%   /System/Volumes/Update\n/dev/disk1s1     466Gi   194Gi   254Gi    44%    2.2M  2.7G    0%   /System/Volumes/Data\nmap auto_home      0Bi     0Bi     0Bi   100%       0     0     -   /System/Volumes/Data/home\n/dev/disk3s1      22Gi    21Gi   550Mi    98%    607k  5.6M   10%   /Library/Developer/CoreSimulator/Volumes/iOS_23C54",
+  "network": {
+    "lo0": [
+      {
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4",
+        "mac": "00:00:00:00:00:00",
+        "internal": true,
+        "cidr": "127.0.0.1/8"
+      },
+      {
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "mac": "00:00:00:00:00:00",
+        "internal": true,
+        "cidr": "::1/128",
+        "scopeid": 0
+      },
+      {
+        "address": "fe80::1",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "00:00:00:00:00:00",
+        "internal": true,
+        "cidr": "fe80::1/64",
+        "scopeid": 1
+      }
+    ],
+    "en5": [
+      {
+        "address": "fe80::aede:48ff:fe00:1122",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "ac:de:48:00:11:22",
+        "internal": false,
+        "cidr": "fe80::aede:48ff:fe00:1122/64",
+        "scopeid": 4
+      }
+    ],
+    "ap1": [
+      {
+        "address": "fe80::ac32:1bff:fe46:3ea3",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "ae:32:1b:46:3e:a3",
+        "internal": false,
+        "cidr": "fe80::ac32:1bff:fe46:3ea3/64",
+        "scopeid": 5
+      }
+    ],
+    "en0": [
+      {
+        "address": "fe80::ba:4c9f:a93e:6298",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "66:71:28:58:ca:ba",
+        "internal": false,
+        "cidr": "fe80::ba:4c9f:a93e:6298/64",
+        "scopeid": 6
+      },
+      {
+        "address": "172.20.10.3",
+        "netmask": "255.255.255.240",
+        "family": "IPv4",
+        "mac": "66:71:28:58:ca:ba",
+        "internal": false,
+        "cidr": "172.20.10.3/28"
+      }
+    ],
+    "awdl0": [
+      {
+        "address": "fe80::7cd8:e2ff:fed9:b88f",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "7e:d8:e2:d9:b8:8f",
+        "internal": false,
+        "cidr": "fe80::7cd8:e2ff:fed9:b88f/64",
+        "scopeid": 7
+      }
+    ],
+    "llw0": [
+      {
+        "address": "fe80::7cd8:e2ff:fed9:b88f",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "7e:d8:e2:d9:b8:8f",
+        "internal": false,
+        "cidr": "fe80::7cd8:e2ff:fed9:b88f/64",
+        "scopeid": 8
+      }
+    ],
+    "utun0": [
+      {
+        "address": "fe80::2f95:d792:691f:ffa",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "00:00:00:00:00:00",
+        "internal": false,
+        "cidr": "fe80::2f95:d792:691f:ffa/64",
+        "scopeid": 17
+      }
+    ],
+    "utun1": [
+      {
+        "address": "fe80::35ef:b06e:f8b2:9980",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "00:00:00:00:00:00",
+        "internal": false,
+        "cidr": "fe80::35ef:b06e:f8b2:9980/64",
+        "scopeid": 18
+      }
+    ],
+    "utun2": [
+      {
+        "address": "fe80::f918:5bb6:fb4d:1adf",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "00:00:00:00:00:00",
+        "internal": false,
+        "cidr": "fe80::f918:5bb6:fb4d:1adf/64",
+        "scopeid": 19
+      }
+    ],
+    "utun3": [
+      {
+        "address": "fe80::ce81:b1c:bd2c:69e",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "00:00:00:00:00:00",
+        "internal": false,
+        "cidr": "fe80::ce81:b1c:bd2c:69e/64",
+        "scopeid": 20
+      }
+    ]
+  },
+  "runtime": {
+    "node": "v22.18.0",
+    "npm": "11.5.2",
+    "python": "Python 3.13.0",
+    "pip": "pip 25.1 from /opt/miniconda3/lib/python3.13/site-packages/pip (python 3.13)"
+  },
+  "user": {
+    "username": "erenakkoc",
+    "homedir": "/Users/erenakkoc"
+  },
+  "env": {
+    "shell": "/bin/zsh",
+    "path": "/Users/erenakkoc/Desktop/ai_native/node_modules/.bin:/Users/erenakkoc/Desktop/node_modules/.bin:/Users/erenakkoc/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/Users/erenakkoc/.nvm/versions/node/v22.18.0/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/usr/local/opt/ruby/bin:/Users/erenakkoc/.nvm/versions/node/v22.18.0/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/opt/maven/bin:/opt/homebrew/opt/openjdk/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/erenakkoc/bin:/Users/erenakkoc/.local/bin:/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/erenakkoc/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand:/Users/erenakkoc/Library/Application Support/Code/User/globalStorage/github.copilot-chat/copilotCli:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/usr/local/share/dotnet:~/.dotnet/tools:/usr/local/go/bin:/Users/erenakkoc/Desktop/MAIN/SOFTWARES/SDKs&Tools/flutter/bin:/Users/erenakkoc/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand:/Users/erenakkoc/Library/Application Support/Code/User/globalStorage/github.copilot-chat/copilotCli:/Users/erenakkoc/.vscode/extensions/ms-python.debugpy-2025.18.0-darwin-x64/bundled/scripts/noConfigScripts"
+  }
+}
