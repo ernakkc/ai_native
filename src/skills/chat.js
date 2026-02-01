@@ -1,4 +1,4 @@
-const { runAI } = require("../brain/ai");    
+const { runAI } = require("./ai.js");    
 const { CHAT_SYSTEM_PROMPT } = require("../../data/prompts/prompt_chat.js");    
 const { createLogger } = require('../utils/logger');
 const logger = createLogger('skills.chat');

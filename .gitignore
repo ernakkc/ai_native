@@ -9,3 +9,6 @@ coverage/
 dist/
 /.idea
 .vscode/
+data/system_info.json
+data/memory
+data/downloads/

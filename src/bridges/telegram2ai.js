@@ -1,4 +1,4 @@
-const { startProcess } = require('../brain/runner');
+const { startProcess } = require('../brain/ProcessController');
 const { createLogger } = require('../utils/logger');
 const logger = createLogger('bridges.telegram2ai');
 

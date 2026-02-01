@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-01-31T19:19:27.968Z",
+  "timestamp": "2026-02-01T21:53:39.339Z",
   "system": {
     "platform": "darwin",
     "arch": "x64",
     "hostname": "Erens-MacBook-Pro.local",
-    "uptime_seconds": 154164,
+    "uptime_seconds": 249815,
     "os": {
       "name": "macOS",
       "version": "ProductName:\t\tmacOS\nProductVersion:\t\t15.7.3\nBuildVersion:\t\t24G419",
@@ -19,10 +19,10 @@
   },
   "memory": {
     "total_mb": 16384,
-    "free_mb": 3128,
-    "used_mb": 13256
+    "free_mb": 1382,
+    "used_mb": 15002
   },
-  "disk": "Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk1s4s1   466Gi    10Gi   254Gi     4%    427k  2.7G    0%   /\ndevfs            199Ki   199Ki     0Bi   100%     691     0  100%   /dev\n/dev/disk1s2     466Gi   2.6Gi   254Gi     2%    2.1k  2.7G    0%   /System/Volumes/Preboot\n/dev/disk1s6     466Gi   3.0Gi   254Gi     2%       3  2.7G    0%   /System/Volumes/VM\n/dev/disk1s5     466Gi   3.1Mi   254Gi     1%      25  2.7G    0%   /System/Volumes/Update\n/dev/disk1s1     466Gi   194Gi   254Gi    44%    2.2M  2.7G    0%   /System/Volumes/Data\nmap auto_home      0Bi     0Bi     0Bi   100%       0     0     -   /System/Volumes/Data/home\n/dev/disk3s1      22Gi    21Gi   550Mi    98%    607k  5.6M   10%   /Library/Developer/CoreSimulator/Volumes/iOS_23C54",
+  "disk": "Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk1s4s1   466Gi    10Gi   255Gi     4%    427k  2.7G    0%   /\ndevfs            196Ki   196Ki     0Bi   100%     680     0  100%   /dev\n/dev/disk1s2     466Gi   2.6Gi   255Gi     2%    2.1k  2.7G    0%   /System/Volumes/Preboot\n/dev/disk1s6     466Gi   2.0Gi   255Gi     1%       2  2.7G    0%   /System/Volumes/VM\n/dev/disk1s5     466Gi   3.1Mi   255Gi     1%      25  2.7G    0%   /System/Volumes/Update\n/dev/disk1s1     466Gi   194Gi   255Gi    44%    2.2M  2.7G    0%   /System/Volumes/Data\nmap auto_home      0Bi     0Bi     0Bi   100%       0     0     -   /System/Volumes/Data/home\n/dev/disk3s1      22Gi    21Gi   550Mi    98%    607k  5.6M   10%   /Library/Developer/CoreSimulator/Volumes/iOS_23C54",
   "network": {
     "lo0": [
       {
@@ -72,36 +72,6 @@
         "internal": false,
         "cidr": "fe80::ac32:1bff:fe46:3ea3/64",
         "scopeid": 5
-      }
-    ],
-    "en0": [
-      {
-        "address": "fe80::ba:4c9f:a93e:6298",
-        "netmask": "ffff:ffff:ffff:ffff::",
-        "family": "IPv6",
-        "mac": "66:71:28:58:ca:ba",
-        "internal": false,
-        "cidr": "fe80::ba:4c9f:a93e:6298/64",
-        "scopeid": 6
-      },
-      {
-        "address": "172.20.10.3",
-        "netmask": "255.255.255.240",
-        "family": "IPv4",
-        "mac": "66:71:28:58:ca:ba",
-        "internal": false,
-        "cidr": "172.20.10.3/28"
-      }
-    ],
-    "awdl0": [
-      {
-        "address": "fe80::7cd8:e2ff:fed9:b88f",
-        "netmask": "ffff:ffff:ffff:ffff::",
-        "family": "IPv6",
-        "mac": "7e:d8:e2:d9:b8:8f",
-        "internal": false,
-        "cidr": "fe80::7cd8:e2ff:fed9:b88f/64",
-        "scopeid": 7
       }
     ],
     "llw0": [
@@ -157,6 +127,55 @@
         "internal": false,
         "cidr": "fe80::ce81:b1c:bd2c:69e/64",
         "scopeid": 20
+      }
+    ],
+    "en6": [
+      {
+        "address": "fe80::1027:84ac:3de3:bcf3",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "32:e0:4f:32:dd:c1",
+        "internal": false,
+        "cidr": "fe80::1027:84ac:3de3:bcf3/64",
+        "scopeid": 14
+      },
+      {
+        "address": "172.20.10.2",
+        "netmask": "255.255.255.240",
+        "family": "IPv4",
+        "mac": "32:e0:4f:32:dd:c1",
+        "internal": false,
+        "cidr": "172.20.10.2/28"
+      }
+    ],
+    "en9": [
+      {
+        "address": "fe80::cfc:2145:f7f:2d",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "32:e0:4f:32:dd:3e",
+        "internal": false,
+        "cidr": "fe80::cfc:2145:f7f:2d/64",
+        "scopeid": 15
+      },
+      {
+        "address": "169.254.244.133",
+        "netmask": "255.255.0.0",
+        "family": "IPv4",
+        "mac": "32:e0:4f:32:dd:3e",
+        "internal": false,
+        "cidr": "169.254.244.133/16"
+      }
+    ],
+    "en8": [
+      {
+        "address": "fe80::4ce4:bcff:fe1e:ae27",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "4e:e4:bc:1e:ae:27",
+        "internal": false,
+        "cidr": "fe80::4ce4:bcff:fe1e:ae27/64",
+        "scopeid": 16
       }
     ]
   },

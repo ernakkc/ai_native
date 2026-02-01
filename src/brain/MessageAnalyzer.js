@@ -1,4 +1,4 @@
-const { runAI } = require('./ai');
+const { runAI } = require('../skills/ai');
 const { ANALYZER_SYSTEM_PROMPT } = require('../../data/prompts/prompt_analyzer');
 const { createLogger } = require('../utils/logger');
 const logger = createLogger('brain.analyzer');
