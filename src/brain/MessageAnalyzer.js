@@ -1,5 +1,5 @@
 const { runAI } = require('../skills/ai');
-const { ANALYZER_SYSTEM_PROMPT } = require('../../data/prompts/prompt_analyzer');
+const { ANALYZER_SYSTEM_PROMPT } = require('../../data/prompts/MessageAnalyzerPrompt');
 const { createLogger } = require('../utils/logger');
 const logger = createLogger('brain.analyzer');
 

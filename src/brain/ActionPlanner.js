@@ -1,5 +1,5 @@
 const { runAI } = require('../skills/ai');
-const { PLANNER_SYSTEM_PROMPT } = require('../../data/prompts/prompt_planner');
+const { PLANNER_SYSTEM_PROMPT } = require('../../data/prompts/ActionPlannerPrompt');
 const { createLogger } = require('../utils/logger');
 const logger = createLogger('brain.planner');
 
