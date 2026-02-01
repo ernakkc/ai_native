@@ -31,7 +31,7 @@ const startProcess = async(message, editMessageCallback) => {
 
     let finalResponse = "No Response";
 
-    finalResponse = await ActionRotator(planningResultJson);
+    finalResponse = await ActionRotator(planningResultJson, analysis);
 
     logger.info('startProcess completed');
     return finalResponse;

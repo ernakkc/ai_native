@@ -5,7 +5,7 @@ const { createLogger } = require('../utils/logger');
 const logger = createLogger('brain.action_rotator');
 
 
-async function ActionRotator(planningResultJson) {
+async function ActionRotator(planningResultJson, originalAnalysis) {
     switch (planningResultJson.type) {
         case "CHAT_INTERACTION":
             logger.info('Handling CHAT_INTERACTION');
@@ -14,7 +14,7 @@ async function ActionRotator(planningResultJson) {
             logger.info('Handling WEB_AUTOMATION');
             return "Web Automation handled.";
         default:
-            return await runOthers(planningResultJson);
+            return await runOthers(planningResultJson, originalAnalysis);
     }
 }
 

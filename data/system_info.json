@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-02-01T21:53:39.339Z",
+  "timestamp": "2026-02-01T22:03:20.492Z",
   "system": {
     "platform": "darwin",
     "arch": "x64",
     "hostname": "Erens-MacBook-Pro.local",
-    "uptime_seconds": 249815,
+    "uptime_seconds": 250396,
     "os": {
       "name": "macOS",
       "version": "ProductName:\t\tmacOS\nProductVersion:\t\t15.7.3\nBuildVersion:\t\t24G419",
@@ -19,10 +19,10 @@
   },
   "memory": {
     "total_mb": 16384,
-    "free_mb": 1382,
-    "used_mb": 15002
+    "free_mb": 293,
+    "used_mb": 16091
   },
-  "disk": "Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk1s4s1   466Gi    10Gi   255Gi     4%    427k  2.7G    0%   /\ndevfs            196Ki   196Ki     0Bi   100%     680     0  100%   /dev\n/dev/disk1s2     466Gi   2.6Gi   255Gi     2%    2.1k  2.7G    0%   /System/Volumes/Preboot\n/dev/disk1s6     466Gi   2.0Gi   255Gi     1%       2  2.7G    0%   /System/Volumes/VM\n/dev/disk1s5     466Gi   3.1Mi   255Gi     1%      25  2.7G    0%   /System/Volumes/Update\n/dev/disk1s1     466Gi   194Gi   255Gi    44%    2.2M  2.7G    0%   /System/Volumes/Data\nmap auto_home      0Bi     0Bi     0Bi   100%       0     0     -   /System/Volumes/Data/home\n/dev/disk3s1      22Gi    21Gi   550Mi    98%    607k  5.6M   10%   /Library/Developer/CoreSimulator/Volumes/iOS_23C54",
+  "disk": "Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk1s4s1   466Gi    10Gi   255Gi     4%    427k  2.7G    0%   /\ndevfs            197Ki   197Ki     0Bi   100%     682     0  100%   /dev\n/dev/disk1s2     466Gi   2.6Gi   255Gi     2%    2.1k  2.7G    0%   /System/Volumes/Preboot\n/dev/disk1s6     466Gi   2.0Gi   255Gi     1%       2  2.7G    0%   /System/Volumes/VM\n/dev/disk1s5     466Gi   3.1Mi   255Gi     1%      25  2.7G    0%   /System/Volumes/Update\n/dev/disk1s1     466Gi   194Gi   255Gi    44%    2.2M  2.7G    0%   /System/Volumes/Data\nmap auto_home      0Bi     0Bi     0Bi   100%       0     0     -   /System/Volumes/Data/home\n/dev/disk3s1      22Gi    21Gi   550Mi    98%    607k  5.6M   10%   /Library/Developer/CoreSimulator/Volumes/iOS_23C54",
   "network": {
     "lo0": [
       {
@@ -148,6 +148,17 @@
         "cidr": "172.20.10.2/28"
       }
     ],
+    "en8": [
+      {
+        "address": "fe80::4ce4:bcff:fe1e:ae27",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "mac": "4e:e4:bc:1e:ae:27",
+        "internal": false,
+        "cidr": "fe80::4ce4:bcff:fe1e:ae27/64",
+        "scopeid": 16
+      }
+    ],
     "en9": [
       {
         "address": "fe80::cfc:2145:f7f:2d",
@@ -159,23 +170,12 @@
         "scopeid": 15
       },
       {
-        "address": "169.254.244.133",
+        "address": "169.254.83.27",
         "netmask": "255.255.0.0",
         "family": "IPv4",
         "mac": "32:e0:4f:32:dd:3e",
         "internal": false,
-        "cidr": "169.254.244.133/16"
-      }
-    ],
-    "en8": [
-      {
-        "address": "fe80::4ce4:bcff:fe1e:ae27",
-        "netmask": "ffff:ffff:ffff:ffff::",
-        "family": "IPv6",
-        "mac": "4e:e4:bc:1e:ae:27",
-        "internal": false,
-        "cidr": "fe80::4ce4:bcff:fe1e:ae27/64",
-        "scopeid": 16
+        "cidr": "169.254.83.27/16"
       }
     ]
   },
@@ -183,7 +183,7 @@
     "node": "v22.18.0",
     "npm": "11.5.2",
     "python": "Python 3.13.0",
-    "pip": "pip 25.1 from /opt/miniconda3/lib/python3.13/site-packages/pip (python 3.13)"
+    "pip": "pip 24.2 from /Users/erenakkoc/Desktop/ai_native/venv/lib/python3.13/site-packages/pip (python 3.13)"
   },
   "user": {
     "username": "erenakkoc",
@@ -191,6 +191,6 @@
   },
   "env": {
     "shell": "/bin/zsh",
-    "path": "/Users/erenakkoc/Desktop/ai_native/node_modules/.bin:/Users/erenakkoc/Desktop/node_modules/.bin:/Users/erenakkoc/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/Users/erenakkoc/.nvm/versions/node/v22.18.0/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/usr/local/opt/ruby/bin:/Users/erenakkoc/.nvm/versions/node/v22.18.0/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/opt/maven/bin:/opt/homebrew/opt/openjdk/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/erenakkoc/bin:/Users/erenakkoc/.local/bin:/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/erenakkoc/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand:/Users/erenakkoc/Library/Application Support/Code/User/globalStorage/github.copilot-chat/copilotCli:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/usr/local/share/dotnet:~/.dotnet/tools:/usr/local/go/bin:/Users/erenakkoc/Desktop/MAIN/SOFTWARES/SDKs&Tools/flutter/bin:/Users/erenakkoc/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand:/Users/erenakkoc/Library/Application Support/Code/User/globalStorage/github.copilot-chat/copilotCli:/Users/erenakkoc/.vscode/extensions/ms-python.debugpy-2025.18.0-darwin-x64/bundled/scripts/noConfigScripts"
+    "path": "/Users/erenakkoc/Desktop/ai_native/node_modules/.bin:/Users/erenakkoc/Desktop/node_modules/.bin:/Users/erenakkoc/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/Users/erenakkoc/.nvm/versions/node/v22.18.0/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/Users/erenakkoc/Desktop/ai_native/venv/bin:/usr/local/opt/ruby/bin:/Users/erenakkoc/.nvm/versions/node/v22.18.0/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/opt/maven/bin:/opt/homebrew/opt/openjdk/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/erenakkoc/bin:/Users/erenakkoc/.local/bin:/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/erenakkoc/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand:/Users/erenakkoc/Library/Application Support/Code/User/globalStorage/github.copilot-chat/copilotCli:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/usr/local/share/dotnet:~/.dotnet/tools:/usr/local/go/bin:/Users/erenakkoc/Desktop/MAIN/SOFTWARES/SDKs&Tools/flutter/bin:/Users/erenakkoc/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand:/Users/erenakkoc/Library/Application Support/Code/User/globalStorage/github.copilot-chat/copilotCli:/Users/erenakkoc/.vscode/extensions/ms-python.debugpy-2025.18.0-darwin-x64/bundled/scripts/noConfigScripts"
   }
 }
