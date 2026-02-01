@@ -96,10 +96,28 @@ async function executeStep(step, attemptNumber = 1, stepOutputs = {}, userInputs
                     exitCode: result.exitCode || 0
                 };
             } else {
+                // Parse error for better error messages
+                const errorOutput = result.stderr || result.error || 'Command execution failed';
+                let suggestion = '';
+                
+                // Detect common errors and provide suggestions
+                if (errorOutput.includes('ModuleNotFoundError') || errorOutput.includes('No module named')) {
+                    const match = errorOutput.match(/No module named '([^']+)'/);
+                    const moduleName = match ? match[1] : 'unknown';
+                    suggestion = `Module '${moduleName}' not installed. Install it with: pip3 install ${moduleName}`;
+                } else if (errorOutput.includes('Permission denied')) {
+                    suggestion = 'Permission denied. Try running with sudo or check file permissions.';
+                } else if (errorOutput.includes('command not found') || errorOutput.includes('No such file or directory')) {
+                    suggestion = 'Command or file not found. Verify the path and command are correct.';
+                } else if (errorOutput.includes('SyntaxError')) {
+                    suggestion = 'Python syntax error. Check the script for syntax mistakes.';
+                }
+                
                 return {
                     success: false,
-                    output: result.stderr || result.error || 'Command execution failed',
-                    error: result.error || 'Unknown error',
+                    output: errorOutput,
+                    error: result.error || 'Command execution failed',
+                    suggestion: suggestion,
                     command: cmd,
                     exitCode: result.exitCode
                 };
@@ -304,6 +322,7 @@ async function runOthers(actionRotatorJson, originalAnalysis) {
                     error: stepResult.error,
                     output: stepResult.output,
                     command: stepResult.command,
+                    suggestion: stepResult.suggestion,
                     failure_action: failureAction,
                     fallback_message: step.on_failure?.fallback_message
                 });
@@ -367,35 +386,48 @@ async function runOthers(actionRotatorJson, originalAnalysis) {
                 output += `  💻 Command: ${result.command}\n`;
             }
             
-            if (result.output) {
+            // Show output only for successful commands or when it's meaningful
+            if (result.status === 'SUCCESS' && result.output && result.output !== 'Command executed successfully') {
                 // Smart truncation - show first part
-                const maxLength = 800;
-                if (result.output.length > maxLength) {
-                    const lines = result.output.split('\n');
+                const maxLength = 600;
+                let displayOutput = result.output;
+                
+                if (displayOutput.length > maxLength) {
+                    const lines = displayOutput.split('\n');
                     let truncated = '';
                     let currentLength = 0;
                     
                     for (const line of lines) {
                         if (currentLength + line.length > maxLength) {
-                            truncated += `\n  ... (${result.output.length - currentLength} more characters)`;
+                            truncated += `\n... (${displayOutput.length - currentLength} more characters)`;
                             break;
                         }
                         truncated += (truncated ? '\n' : '') + line;
                         currentLength += line.length + 1;
                     }
-                    
-                    output += `  📄 Output:\n${truncated.split('\n').map(l => '    ' + l).join('\n')}\n`;
-                } else {
-                    output += `  📄 Output:\n${result.output.split('\n').map(l => '    ' + l).join('\n')}\n`;
+                    displayOutput = truncated;
                 }
+                
+                output += `  📄 Output:\n${displayOutput.split('\n').map(l => '    ' + l).join('\n')}\n`;
             }
             
-            if (result.error) {
-                output += `  ⚠️  Error: ${result.error}\n`;
-            }
-            
-            if (result.fallback_message) {
-                output += `  💡 Note: ${result.fallback_message}\n`;
+            // For failed steps, show detailed error information
+            if (result.status === 'FAILED') {
+                if (result.output) {
+                    const errorLines = result.output.split('\n').slice(0, 15); // Show first 15 lines of error
+                    output += `  ❌ Error Output:\n${errorLines.map(l => '    ' + l).join('\n')}\n`;
+                    if (result.output.split('\n').length > 15) {
+                        output += `    ... (${result.output.split('\n').length - 15} more lines)\n`;
+                    }
+                }
+                
+                if (result.suggestion) {
+                    output += `  💡 Suggestion: ${result.suggestion}\n`;
+                }
+                
+                if (result.fallback_message) {
+                    output += `  📌 Note: ${result.fallback_message}\n`;
+                }
             }
             
             if (result.reason) {

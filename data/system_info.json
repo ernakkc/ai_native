@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-02-01T22:50:31.856Z",
+  "timestamp": "2026-02-01T23:01:37.442Z",
   "system": {
     "platform": "darwin",
     "arch": "x64",
     "hostname": "Erens-MacBook-Pro.local",
-    "uptime_seconds": 253227,
+    "uptime_seconds": 253893,
     "os": {
       "name": "macOS",
       "version": "ProductName:\t\tmacOS\nProductVersion:\t\t15.7.3\nBuildVersion:\t\t24G419",
@@ -19,8 +19,8 @@
   },
   "memory": {
     "total_mb": 16384,
-    "free_mb": 248,
-    "used_mb": 16136
+    "free_mb": 394,
+    "used_mb": 15990
   },
   "disk": "Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk1s4s1   466Gi    10Gi   255Gi     4%    427k  2.7G    0%   /\ndevfs            197Ki   197Ki     0Bi   100%     682     0  100%   /dev\n/dev/disk1s2     466Gi   2.6Gi   255Gi     2%    2.1k  2.7G    0%   /System/Volumes/Preboot\n/dev/disk1s6     466Gi   2.0Gi   255Gi     1%       2  2.7G    0%   /System/Volumes/VM\n/dev/disk1s5     466Gi   3.1Mi   255Gi     1%      25  2.7G    0%   /System/Volumes/Update\n/dev/disk1s1     466Gi   195Gi   255Gi    44%    2.2M  2.7G    0%   /System/Volumes/Data\nmap auto_home      0Bi     0Bi     0Bi   100%       0     0     -   /System/Volumes/Data/home\n/dev/disk3s1      22Gi    21Gi   550Mi    98%    607k  5.6M   10%   /Library/Developer/CoreSimulator/Volumes/iOS_23C54",
   "network": {

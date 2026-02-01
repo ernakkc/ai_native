@@ -13,7 +13,57 @@ if (!process.env.TELEGRAM_API_KEY) {
 const bot = new Telegraf(process.env.TELEGRAM_API_KEY);
 
 // For security, let's get the Admin ID from .env (Optional but recommended)
-const ADMIN_ID = process.env.ADMIN_ID; 
+const ADMIN_ID = process.env.ADMIN_ID;
+
+// Telegram message limit is 4096 characters
+const TELEGRAM_MESSAGE_LIMIT = 4096;
+
+/**
+ * Split long message into chunks that fit Telegram's character limit
+ * @param {String} text - Long text to split
+ * @param {Number} maxLength - Maximum length per chunk (default: 4000 to leave room for formatting)
+ * @returns {Array<String>} - Array of message chunks
+ */
+function splitMessage(text, maxLength = 4000) {
+    if (text.length <= maxLength) {
+        return [text];
+    }
+
+    const chunks = [];
+    let currentChunk = '';
+    const lines = text.split('\n');
+
+    for (const line of lines) {
+        // If a single line is longer than maxLength, split it by characters
+        if (line.length > maxLength) {
+            if (currentChunk) {
+                chunks.push(currentChunk);
+                currentChunk = '';
+            }
+            
+            // Split long line into character chunks
+            for (let i = 0; i < line.length; i += maxLength) {
+                chunks.push(line.substring(i, i + maxLength));
+            }
+            continue;
+        }
+
+        // If adding this line exceeds limit, save current chunk and start new one
+        if (currentChunk.length + line.length + 1 > maxLength) {
+            chunks.push(currentChunk);
+            currentChunk = line;
+        } else {
+            currentChunk += (currentChunk ? '\n' : '') + line;
+        }
+    }
+
+    // Add remaining chunk
+    if (currentChunk) {
+        chunks.push(currentChunk);
+    }
+
+    return chunks;
+} 
 
 async function startTelegramBot() {
     logger.info('startTelegramBot initialized');
@@ -59,15 +109,46 @@ async function startTelegramBot() {
             const aiResponse = await telegramMessageBridge(userMessage, editMessageCallback);
 
             // Write the response back to Telegram
+            let responseText;
             if (typeof aiResponse === 'object') {
-                await ctx.reply('```json\n' + JSON.stringify(aiResponse, null, 2) + '\n```', { parse_mode: 'Markdown' });
+                responseText = '```json\n' + JSON.stringify(aiResponse, null, 2) + '\n```';
             } else {
-                await ctx.reply(`${aiResponse}`);
+                responseText = String(aiResponse);
+            }
+
+            // Split long messages into chunks
+            const messageChunks = splitMessage(responseText);
+            
+            if (messageChunks.length === 1) {
+                // Single message, send as usual
+                if (typeof aiResponse === 'object') {
+                    await ctx.reply(messageChunks[0], { parse_mode: 'Markdown' });
+                } else {
+                    await ctx.reply(messageChunks[0]);
+                }
+            } else {
+                // Multiple chunks, send each as separate complete message
+                logger.info(`Splitting long response into ${messageChunks.length} messages`);
+                
+                for (let i = 0; i < messageChunks.length; i++) {
+                    await ctx.reply(messageChunks[i]);
+                    
+                    // Small delay between messages to avoid rate limiting
+                    if (i < messageChunks.length - 1) {
+                        await new Promise(resolve => setTimeout(resolve, 300));
+                    }
+                }
             }
 
         } catch (error) {
             logger.error('AI Bridge Error:', error);
-            await ctx.reply('⚠️ An error occurred: ' + (error.message || error));
+            const errorMessage = '⚠️ An error occurred: ' + (error.message || error);
+            
+            // Split error message if too long
+            const errorChunks = splitMessage(errorMessage);
+            for (const chunk of errorChunks) {
+                await ctx.reply(chunk);
+            }
         }
     });
 
