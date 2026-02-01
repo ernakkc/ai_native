@@ -27,10 +27,15 @@ async function runAI(userMessage, constantPrompt){
         });
 
         // Gelen yanıtı parse et (response.message.content bazen string olabilir veya zaten objedir)
-        const raw = response?.message?.content;
-        const result = (typeof raw === 'string') ? JSON.parse(raw) : raw;
-        logger.info('runAI result', result);
-        return result;
+        try {
+            const raw = response?.message?.content;
+            const result = (typeof raw === 'string') ? JSON.parse(raw) : raw;
+            logger.info('runAI result', result);
+            return result;
+        } catch (parseError) {
+            return response?.message?.content;
+        }
+
 
     } catch (error) {
         logger.error('Analyzer Error:', error);
