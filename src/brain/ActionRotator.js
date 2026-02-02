@@ -9,7 +9,11 @@ async function ActionRotator(planningResultJson, originalAnalysis) {
     switch (planningResultJson.type) {
         case "CHAT_INTERACTION":
             logger.info('Handling CHAT_INTERACTION');
-            return await chatIterate(planningResultJson);
+            // For chat, pass the original user message, not the plan
+            const userMessage = originalAnalysis?.parameters?.original_message || 
+                               originalAnalysis?.summary || 
+                               planningResultJson.goal;
+            return await chatIterate(userMessage);
         case "WEB_AUTOMATION":
             logger.info('Handling WEB_AUTOMATION');
             return "Web Automation handled.";

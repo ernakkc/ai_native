@@ -204,15 +204,27 @@ async function getCommandRecommendations(task) {
 /**
  * Inject system context into prompt
  * @param {string} prompt - Original prompt
- * @param {Object} options - Options (compact, position)
+ * @param {Object} options - Options (compact, position, includeMemory)
  * @returns {Promise<string>} Prompt with system context
  */
 async function injectSystemContext(prompt, options = {}) {
-    const { compact = false, position = 'end' } = options;
+    const { compact = false, position = 'end', includeMemory = false } = options;
     
-    const context = compact 
+    let context = compact 
         ? await generateCompactSystemContext()
         : await generateSystemContext();
+    
+    // Add memory context if requested
+    if (includeMemory) {
+        const { getMemoryManager } = require('./memory_manager');
+        const memoryManager = getMemoryManager();
+        
+        const memoryContext = compact
+            ? await memoryManager.generateCompactMemoryContext()
+            : await memoryManager.generateMemoryContext();
+        
+        context += '\n' + memoryContext;
+    }
     
     if (position === 'start') {
         return context + '\n\n' + prompt;

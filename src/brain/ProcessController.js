@@ -1,6 +1,7 @@
 const { analyzeMessage } = require('./MessageAnalyzer');
 const { planAnalyze } = require('./ActionPlanner');
 const { ActionRotator } = require('./ActionRotator');
+const { getMemoryManager } = require('../utils/memory_manager');
 
 const { createLogger } = require('../utils/logger');
 const logger = createLogger('brain.runner');
@@ -164,12 +165,28 @@ const startProcess = async(message, editMessageCallback) => {
 
         // Check if this is pure chat interaction (no action needed)
         if (analysis.type === 'CHAT_INTERACTION') {
-            logger.info('Pure chat interaction detected, skipping planning and execution');
+            logger.info('Pure chat interaction detected, routing to chat handler');
             
-            // For greetings and simple conversations, return direct response
-            const chatResponse = analysis.parameters?.message || 
-                                analysis.fallback?.message || 
-                                'Hello! How can I assist you today?';
+            if (typeof editMessageCallback === 'function') {
+                await editMessageCallback('💬 Generating response...');
+            }
+            
+            // Route to chat handler with original user message
+            const { chatIterate } = require('../executor/chat_interaction');
+            const chatResponse = await chatIterate(message, editMessageCallback);
+            
+            // Save conversation to memory
+            const memoryManager = getMemoryManager();
+            await memoryManager.saveConversation({
+                userMessage: message,
+                aiResponse: chatResponse,
+                intentType: 'CHAT_INTERACTION',
+                intentCategory: analysis.intent,
+                metadata: {
+                    request_id: analysis.request_id,
+                    confidence: analysis.confidence
+                }
+            });
             
             return chatResponse;
         }
@@ -247,10 +264,25 @@ const startProcess = async(message, editMessageCallback) => {
         let finalResponse = await ActionRotator(planningResultJson, analysis);
 
         // =========================
-        // STEP 6: FINALIZE
+        // STEP 6: FINALIZE & SAVE TO MEMORY
         // =========================
         planningResult.status = 'COMPLETED';
         planningResult.result.success = true;
+        
+        // Save conversation to memory
+        const memoryManager = getMemoryManager();
+        await memoryManager.saveConversation({
+            userMessage: prompt,
+            aiResponse: finalResponse,
+            intentType: analysis.type,
+            intentCategory: analysis.intent,
+            metadata: {
+                request_id: analysis.request_id,
+                plan_id: planningResult.plan_id,
+                confidence: analysis.confidence,
+                risk_level: planningResult.risk_level
+            }
+        });
         
         logger.info('startProcess completed successfully', {
             request_id: analysis.request_id,
