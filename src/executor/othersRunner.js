@@ -1,6 +1,7 @@
 const { runAI } = require('../skills/ai');
 const { runCommand } = require('../skills/commandRunner');
 const { OtherRunnersPrompt } = require('../../data/prompts/OthersRunnerPrompt.js');
+const { injectSystemContext } = require('../utils/system_context');
 
 const { createLogger } = require('../utils/logger');
 const logger = createLogger('executor.others_runner');
@@ -230,13 +231,19 @@ async function runOthers(actionRotatorJson, originalAnalysis) {
         if (!plan.steps || !Array.isArray(plan.steps)) {
             logger.error('Invalid plan structure: missing or invalid steps array');
             
-            // Fallback: Use AI to generate commands
+            // Fallback: Use AI to generate commands with system context
             logger.info('Falling back to AI command generation');
             const contextPrompt = originalAnalysis 
                 ? `Original Analysis Details: ${JSON.stringify(originalAnalysis)}\n\nPlanning Steps: ${actionRotatorJson}\n\n`
                 : `Planning Steps: ${actionRotatorJson}\n\n`;
             
-            const commandsJson = await runAI(contextPrompt, OtherRunnersPrompt);
+            // Inject system context into the prompt
+            const systemAwarePrompt = await injectSystemContext(OtherRunnersPrompt, {
+                position: 'end',
+                compact: true
+            });
+            
+            const commandsJson = await runAI(contextPrompt, systemAwarePrompt);
             logger.info('AI fallback result', commandsJson);
             
             let fallbackResult = "";
@@ -361,14 +368,14 @@ async function runOthers(actionRotatorJson, originalAnalysis) {
 
         // Build beautiful output
         let output = '';
-        output += `╔════════════════════════════════════════════════════════════════════════════╗\n`;
-        output += `║ 📋 EXECUTION SUMMARY                                                        ║\n`;
-        output += `╠════════════════════════════════════════════════════════════════════════════╣\n`;
-        output += `║ Goal: ${plan.goal.substring(0, 68).padEnd(68)} ║\n`;
-        output += `║ Plan ID: ${plan.plan_id.substring(0, 64).padEnd(64)} ║\n`;
-        output += `║ Status: ${(planSuccess ? '✅ SUCCESS' : '❌ FAILED').padEnd(67)} ║\n`;
-        output += `║ Steps: ${String(successCount).padStart(2)}/${String(results.length).padStart(2)} succeeded, ${String(failedCount).padStart(2)} failed, ${String(skippedCount).padStart(2)} skipped${' '.repeat(28)} ║\n`;
-        output += `╚════════════════════════════════════════════════════════════════════════════╝\n\n`;
+        output += `╔══════════════════════════════════════════════════════════╗\n`;
+        output += `║ 📋 EXECUTION SUMMARY                                    ║\n`;
+        output += `╠══════════════════════════════════════════════════════════╣\n`;
+        output += `║ Goal: ${plan.goal.substring(0, 48).padEnd(48)} ║\n`;
+        output += `║ Plan: ${plan.plan_id.substring(0, 25).padEnd(48)} ║\n`;
+        output += `║ Status: ${(planSuccess ? '✅ SUCCESS' : '❌ FAILED').padEnd(47)} ║\n`;
+        output += `║ Steps: ${String(successCount)}/${String(results.length)} done, ${String(failedCount)} failed, ${String(skippedCount)} skipped`.padEnd(57) + ` ║\n`;
+        output += `╚══════════════════════════════════════════════════════════╝\n\n`;
 
         // Step details
         for (let i = 0; i < results.length; i++) {
@@ -380,7 +387,7 @@ async function runOthers(actionRotatorJson, originalAnalysis) {
                               result.status === 'FAILED' ? '❌' : '⏭️';
             
             output += `${statusIcon} Step ${stepNum}: ${result.name}\n`;
-            output += `${'─'.repeat(80)}\n`;
+            output += `${'─'.repeat(58)}\n`;
             
             if (result.command) {
                 output += `  💻 Command: ${result.command}\n`;
@@ -438,7 +445,7 @@ async function runOthers(actionRotatorJson, originalAnalysis) {
         }
 
         // Final summary line
-        output += `${'═'.repeat(80)}\n`;
+        output += `${'═'.repeat(58)}\n`;
         if (planSuccess) {
             output += `✅ All tasks completed successfully!\n`;
         } else {

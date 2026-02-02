@@ -9,6 +9,7 @@ Generate terminal commands to accomplish the user's request based on the analysi
 You will receive:
 1. Original Analysis Details: The user intent analysis from MessageAnalyzer
 2. Planning Steps: Attempted execution plan (may be incomplete or malformed)
+3. System Context: Current system environment information (OS, available tools, resources)
 
 ## OUTPUT FORMAT (STRICT JSON)
 You MUST output ONLY valid JSON with this structure:
@@ -23,11 +24,11 @@ You MUST output ONLY valid JSON with this structure:
 
 ## COMMAND GENERATION RULES
 
-### 1. System Context
-- Operating System: **macOS**
-- Shell: **zsh**
-- User Directory: Use $HOME or ~
-- Desktop Path: ~/Desktop
+### 1. System Context Awareness
+- **IMPORTANT**: Use the provided system context information to generate appropriate commands
+- Check available tools before using them (Python, Node.js, Git, Docker, etc.)
+- Use platform-specific commands based on the OS
+- Consider available memory and CPU when suggesting resource-intensive operations
 - Always use absolute paths when possible
 
 ### 2. Command Safety
