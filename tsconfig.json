@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    /* 1. Klasör Düzeni (Aktif edildi) */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* 2. Node.js Ortam Ayarları */
+    "module": "NodeNext",
+    "target": "ES2022",
+    "lib": ["es2022"], /* Node.js için gerekli kütüphaneler */
+    
+    /* 3. Tip Tanımları */
+    "types": ["node"],
+
+    /* 4. Çıktı Ayarları */
+    "sourceMap": true,       /* Hata ayıklarken (debug) TS satırını görmek için */
+    "declaration": false,    /* Kütüphane yazmıyorsan buna gerek yok, false yapabilirsin */
+    "declarationMap": false,
+
+    /* 5. Katı Kurallar (Güvenlik) */
+    "strict": true,
+    "noImplicitAny": true,
+    
+    /* 6. Aşırı Katı Ayarlar (İstersen kapatabilirsin) */
+    /* Başlangıçta çok yorabilir, false yapmak bazen rahatlatır: */
+    "noUncheckedIndexedAccess": true, 
+    "exactOptionalPropertyTypes": true,
+
+    /* 7. ÖNEMLİ DÜZELTMELER */
+    "skipLibCheck": true,            /* <--- Bunu kesinlikle true yap */
+    "esModuleInterop": true,         /* CommonJS modüllerini rahat import etmek için */
+    "moduleResolution": "nodenext",
+    
+    /* 8. Gereksizler Temizlendi */
+    // "jsx": "react-jsx" (Silindi)
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

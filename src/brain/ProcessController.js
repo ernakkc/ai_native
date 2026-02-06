@@ -2,6 +2,8 @@ const { analyzeMessage } = require('./MessageAnalyzer');
 const { planAnalyze } = require('./ActionPlanner');
 const { ActionRotator } = require('./ActionRotator');
 const { getMemoryManager } = require('../utils/memory_manager');
+const { editMessage } = require('../interfaces/telegram/bot');
+const { getCallbackData } = require('../interfaces/telegram/bot');
 
 const { createLogger } = require('../utils/logger');
 const logger = createLogger('brain.runner');
@@ -9,16 +11,6 @@ const logger = createLogger('brain.runner');
 // Minimum confidence threshold for proceeding with actions
 const MIN_CONFIDENCE_THRESHOLD = 0.7;
 
-// Approval callback placeholder (can be customized for user confirmation)
-let approvalCallback = null;
-
-/**
- * Set custom approval callback function
- * @param {Function} callback - Function to call when approval is needed
- */
-const setApprovalCallback = (callback) => {
-    approvalCallback = callback;
-};
 
 /**
  * Request user approval for high-risk operations
@@ -39,10 +31,6 @@ const requestApproval = async (analysis, plan) => {
 
     logger.warn('APPROVAL REQUIRED', approvalInfo);
 
-    // If custom approval callback is set, use it
-    if (typeof approvalCallback === 'function') {
-        return await approvalCallback(approvalInfo);
-    }
 
     // Default: Auto-approve for now (should be changed in production)
     logger.warn('No approval callback set. Auto-approving (unsafe for production!)');
@@ -125,11 +113,12 @@ const validatePlan = (plan) => {
 
 /**
  * Main process controller
- * @param {String} message - User message to process
- * @param {Function} editMessageCallback - Optional callback for status updates
+ * @param {Object} ctx - Telegram context object
  * @returns {String} - Final execution result
  */
-const startProcess = async(message, editMessageCallback) => {
+const startProcess = async(ctx) => {
+    const message = ctx.message.text;
+
     try {
         logger.info('startProcess called', { message });
 
@@ -137,18 +126,17 @@ const startProcess = async(message, editMessageCallback) => {
         // STEP 1: ANALYZE MESSAGE
         // =========================
         logger.info('Step 1: Analyzing user message...');
+        await editMessage(ctx, null, 'Step 1: Analyzing user message...', true);
         const analysis = await analyzeMessage(message);
         logger.info('Analysis result', analysis);
-        
-        if (typeof editMessageCallback === 'function') {
-            await editMessageCallback(`✓ Analysis Complete\n` +
-                `Type: ${analysis.type}\n` +
-                `Intent: ${analysis.intent}\n` +
-                `Confidence: ${(analysis.confidence * 100).toFixed(0)}%\n` +
-                `Risk: ${analysis.risk_level}\n` +
-                `Summary: ${analysis.summary}`
-            );
-        }
+        await editMessage(
+            ctx, null, `✓ Analysis Complete\n` +
+            `Type: ${analysis.type}\n` +
+            `Intent: ${analysis.intent}\n` +
+            `Confidence: ${(analysis.confidence * 100).toFixed(0)}%\n` +
+            `Risk: ${analysis.risk_level}\n` +
+            `Summary: ${analysis.summary}`, true
+        );
 
         // Validate analysis
         const analysisValidation = validateAnalysis(analysis);
@@ -297,7 +285,11 @@ const startProcess = async(message, editMessageCallback) => {
         return finalResponse;
 
     } catch (error) {
-        logger.error('startProcess Error:', error);
+        logger.error('startProcess Error:', {
+            message: error.message,
+            stack: error.stack,
+            name: error.name
+        });
         
         // Update plan status if available
         if (planningResult) {
@@ -315,4 +307,4 @@ const startProcess = async(message, editMessageCallback) => {
     }
 };
 
-module.exports = { startProcess, setApprovalCallback };
+module.exports = { startProcess };

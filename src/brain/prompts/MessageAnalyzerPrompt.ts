@@ -295,4 +295,25 @@ Before outputting, verify:
 - **3 TYPES ONLY**: OTHERS, WEB_AUTOMATION, CHAT_INTERACTION - nothing else
 `;
 
-module.exports = { ANALYZER_SYSTEM_PROMPT };
+interface AnalysisResult {
+  request_id: string;
+  type: 'OTHERS' | 'WEB_AUTOMATION' | 'CHAT_INTERACTION';
+  intent: string;
+  confidence: number;
+  summary: string;
+  requires_approval: boolean;
+  risk_level: 'LOW' | 'MEDIUM' | 'HIGH';
+  tool_suggestion: 'TERMINAL' | 'PLAYWRIGHT' | 'PUPPETEER' | 'AXIOS' | 'NONE';
+  parameters: Record<string, any>;
+  context: {
+    source: string;
+    user_text: string;
+    language: string;
+  };
+  fallback: {
+    on_fail: string;
+    message: string;
+  };
+}
+
+export { ANALYZER_SYSTEM_PROMPT , AnalysisResult };
